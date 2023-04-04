@@ -157,6 +157,20 @@ public class MemoRepositoryTests {
         );
     }
 
+    @Test
+    public void testgetListWithQueryObject(){
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("mno").ascending()); // 오름차순 생략 가능
+        Page<Object[]> result = memoRepository.getListWithQueryObject(15L, pageable);
+        result.get().forEach(
+                obj -> System.out.println(obj[0] + "\t" + obj[1] + "\t" + obj[2])
+        );
+    }
 
-
+    @Test
+    public void testgetNativeResult(){
+        List<Object[]> list = memoRepository.getNativeResult();
+        for(Object[] obj : list){
+            System.out.println(obj[0] + " :: " + obj[1]);
+        }
+    }
 }
